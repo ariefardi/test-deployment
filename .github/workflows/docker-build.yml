@@ -19,6 +19,14 @@ jobs:
         uses: webfactory/ssh-agent@v0.5.3
         with:
           ssh-private-key: ${{ secrets.GCP_SSH_PRIVATE_KEY }}
+      - name: Add VM to known hosts
+        run: |
+          mkdir -p ~/.ssh
+          ssh-keyscan -H ${{ secrets.GCP_VM_IP }} >> ~/.ssh/known_hosts
+
+      - name: SSH into VM
+        run: |
+          ssh -T arief_of_komikapecahkan@${{ secrets.GCP_VM_IP }} "echo 'Connected to VM'"
 
       # Build Docker image
       - name: Build Docker image
