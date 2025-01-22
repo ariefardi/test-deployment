@@ -1,21 +1,18 @@
-# Use an official Node.js runtime as the base image
+# Use the official Node.js image
 FROM node:18
 
 # Set the working directory
 WORKDIR /app
 
-# Copy package.json and package-lock.json
+# Copy package.json and install dependencies
 COPY package*.json ./
-
-# Install dependencies
 RUN npm install
 
-# Copy the rest of the application
+# Copy the rest of the application files
 COPY . .
 
+# Expose the port the app will run on
+EXPOSE 8080
 
-# Expose the application's port (optional)
-EXPOSE 3000
-
-# Define the command to start the application
+# Start the app
 CMD ["npm", "start"]
