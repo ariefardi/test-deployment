@@ -20,6 +20,15 @@ jobs:
           echo "Checking if the SSH key is passed"
           echo "${{ secrets.GCP_VM_SSH_KEY }}" | head -n 10  # Only print the first 10 characters for safety
 
+      -name: Echo Test Exist
+        run: |
+          if [ -z "${{ secrets.GCP_VM_SSH_KEY }}" ]; then
+            echo "SSH key is not available."
+            exit 1
+          else
+            echo "SSH key is available."
+          fi
+
       # Set up SSH
       - name: Set up SSH
         run: |
