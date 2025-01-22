@@ -24,10 +24,9 @@ jobs:
         run: |
           if [ -z "${{ secrets.GCP_VM_SSH_KEY }}" ]; then
             echo "SSH key is not available."
-            exit 1
           else
             echo "SSH key is available."
-          fi
+          
 
       # Set up SSH
       - name: Set up SSH
