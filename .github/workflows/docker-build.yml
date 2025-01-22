@@ -24,9 +24,9 @@ jobs:
       - name: Set up SSH
         run: |
           mkdir -p ~/.ssh
-          echo "${{ secrets.GCP_VM_SSH_KEY }}" > ~/.ssh/github-action-key
-          chmod 600 ~/.ssh/github-action-key
-          ssh-keyscan -H ${{ secrets.GCP_VM_IP }} >> ~/.ssh/known_hosts
+            echo "${{ secrets.GCP_VM_SSH_KEY }}" > ~/.ssh/github-action-key
+            chmod 600 ~/.ssh/github-action-key
+            ssh-keyscan -H ${{ secrets.GCP_VM_IP }} >> ~/.ssh/known_hosts
 
       # Build Docker image
       - name: Build Docker image
