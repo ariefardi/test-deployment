@@ -15,19 +15,12 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v3
 
-      - name: Debug Secret
-        run: |
-          echo "Checking if the SSH key is passed"
-          echo "${{ secrets.GCP_VM_SSH_KEY }}" | head -n 10  # Only print the first 10 characters for safety
-          echo "Exist"
-
       # Set up SSH
       - name: Set up SSH
-        run: |
-          mkdir -p ~/.ssh
-            echo "${{ secrets.GCP_VM_SSH_KEY }}" > ~/.ssh/github-action-key
-            chmod 600 ~/.ssh/github-action-key
-            ssh-keyscan -H ${{ secrets.GCP_VM_IP }} >> ~/.ssh/known_hosts
+        uses: webfactory/ssh-agent@v0.5.3
+        with:
+          ssh-private-key: ${{ secrets.GCP_SSH_PRIVATE_KEY }}
+        run: echo "Success"
 
       # Build Docker image
       - name: Build Docker image
