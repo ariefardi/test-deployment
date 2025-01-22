@@ -32,7 +32,7 @@ jobs:
       # Copy the Docker image to the VM
       - name: Copy Docker image to VM
         run: |
-          scp -o StrictHostKeyChecking=no my-app.tar ${{ secrets.GCP_VM_USER }}@${{ secrets.GCP_VM_IP }}:/home/${{ secrets.GCP_VM_USER }}/
+          scp -i ~/.ssh/github-action-key -o StrictHostKeyChecking=no my-app.tar arief_of_komikapecahkan@10.184.0.2:/home/arief_of_komikapecahkan/
 
       # Deploy the Docker image on the VM
       - name: Deploy Docker container on VM
